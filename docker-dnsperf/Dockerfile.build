@@ -1,0 +1,6 @@
+FROM centos:7
+MAINTAINER lijiaocn <lijiaocn@foxmail.com>
+
+WORKDIR  /root
+
+RUN yum install -y git gcc make
