@@ -1,0 +1,21 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+    name: websocket
+    labels:
+        app: websocket
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: websocket
+    template:
+        metadata:
+            labels:
+                app: websocket
+        spec:
+            containers:
+            - name: websocket
+              image: lijiaocn/websocket:1.0
+              ports:
+              - containerPort: 8080

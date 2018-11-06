@@ -1,7 +1,7 @@
 SOURCE_DIR=$(shell pwd)/Server
 PROJECT=$(shell basename ${SOURCE_DIR})
 PREFIX=lijiaocn
-TAG=0.1
+TAG=1.0
 IMAGE=${PREFIX}/websocket:${TAG}
 
 build:
