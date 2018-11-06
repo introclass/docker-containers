@@ -1,11 +1,11 @@
 SOURCE_DIR=$(shell pwd)/Server
 PROJECT=$(shell basename ${SOURCE_DIR})
 PREFIX=lijiaocn
-TAG=2.0
-IMAGE=${PREFIX}/webshell:${TAG}
+TAG=0.1
+IMAGE=${PREFIX}/websocket:${TAG}
 
 build:
-	docker run --rm -v ${SOURCE_DIR}:/go/src/${PROJECT} -w /go/src/${PROJECT} golang:1.8.1 \
+	docker run --rm -v ${SOURCE_DIR}:/go/src/${PROJECT} -w /go/src/${PROJECT} golang:1.11.2 \
 	/bin/sh -c "CGO_ENABLED=0 GOARCH=amd64 GOOS=linux go build -gcflags \"-N -l\""
 
 image:
@@ -13,5 +13,5 @@ image:
 
 run:
 	docker run -idt \
-		-p 8080:80  \
+		-p 80:8080  \
 		${IMAGE}

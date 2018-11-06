@@ -5,10 +5,10 @@ WORKDIR   /root
 
 RUN yum install -y gcc 
 
-ADD ./oom.c          /root
+ADD ./malloc.c       /root
 ADD ./entrypoint.sh  /root
 
-RUN gcc -o oom oom.c
+RUN gcc -o malloc ./malloc.c
 
 USER root
 

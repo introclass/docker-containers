@@ -12,6 +12,6 @@ func main() {
 	mux.Handle("/", Shell{})
 	mux.Handle("/ping", Ping{})
 	mux.Handle("/cookie", Cookie{})
-	server := http.Server{Addr: ":80", Handler: mux}
+	server := http.Server{Addr: ":8080", Handler: mux}
 	log.Fatal(server.ListenAndServe())
 }
