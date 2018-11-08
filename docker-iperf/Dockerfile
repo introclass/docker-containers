@@ -5,8 +5,6 @@ WORKDIR   /root
 
 RUN apk update && apk add iperf
 
-ENV ABC $a
-
 EXPOSE 5001
 
 ENTRYPOINT ["/usr/bin/iperf", "-p", "5001", "-s" ]
