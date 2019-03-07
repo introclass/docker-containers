@@ -1,0 +1,7 @@
+FROM centos:7
+LABEL maintainer="https://www.lijiaocn.com"
+
+RUN yum install -y yum-utils  epel-release\
+&& yum-config-manager --add-repo https://openresty.org/package/centos/openresty.repo \
+&& yum install -y openresty openresty-resty luarocks make git gcc lua-devel openssl-devel m4 \
+&& yum clean all
