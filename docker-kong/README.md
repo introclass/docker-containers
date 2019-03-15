@@ -26,7 +26,7 @@ base镜像基于CentOS7，并且在里面安装了gcc等工具，最后生成的
 docker run -it --rm $enviroments \
 -e KONG_PREFIX=/usr/local/kong
 -e ONG_DATABASE=postgres     
--e KONG_PG_HOST=127.0.0.1   
+-e KONG_PG_HOST=10.10.64.58   
 -e KONG_PG_PORT=5432          
 -e KONG_PG_USER=kong          
 -e KONG_PG_PASSWORD=kong-dev  
@@ -42,7 +42,7 @@ lijiaocn/kong:1.0.3  kong migrations bootstrap
 docker run -it --rm $enviroments \
 -e KONG_PREFIX=/usr/local/kong
 -e ONG_DATABASE=postgres     
--e KONG_PG_HOST=127.0.0.1   
+-e KONG_PG_HOST=10.10.64.58   
 -e KONG_PG_PORT=5432          
 -e KONG_PG_USER=kong          
 -e KONG_PG_PASSWORD=kong-dev  
@@ -50,5 +50,5 @@ docker run -it --rm $enviroments \
 -e KONG_PROXY_LISTEN='0.0.0.0:8000, 0.0.0.0:8443 ssl'  \
 -e KONG_ADMIN_LISTEN='0.0.0.0:8001, 0.0.0.0:8444 ssl'  \
 -p 8000:8000 -p 8443:8443 -p 8001:8001 -p 8444:8444    \
-lijiaocn/kong:1.0.3
+lijiaocn/kong:1.0.3 kong docker-start
 ```
