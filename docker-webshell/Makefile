@@ -1,7 +1,7 @@
 SOURCE_DIR=$(shell pwd)/Server
 PROJECT=$(shell basename ${SOURCE_DIR})
 PREFIX=lijiaocn
-TAG=2.0
+TAG=2.1
 IMAGE=${PREFIX}/webshell:${TAG}
 
 build:

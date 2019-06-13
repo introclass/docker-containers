@@ -8,4 +8,6 @@ ADD ./Server/webshell.gtpl  /root/
 
 CMD ["./Server"]
 
+ENV IDLE_TIMEOUT 60
+
 EXPOSE 8080
