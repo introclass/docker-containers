@@ -1,0 +1,12 @@
+docker build -f ./Dockerfile.base -t lijiaocn/openresty:centos  .
+Sending build context to Docker daemon  69.63kB
+Step 1/3 : FROM centos:7
+ ---> 9f38484d220f
+Step 2/3 : LABEL maintainer="https://www.lijiaocn.com"
+ ---> Using cache
+ ---> bd58ff218cf5
+Step 3/3 : RUN yum install -y yum-utils  epel-release && yum-config-manager --add-repo https://openresty.org/package/centos/openresty.repo && yum install -y openresty openresty-resty luarocks make git gcc lua-devel openssl-devel m4 && yum clean all
+ ---> Using cache
+ ---> 165203e1fbae
+Successfully built 165203e1fbae
+Successfully tagged lijiaocn/openresty:centos
