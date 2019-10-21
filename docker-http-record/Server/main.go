@@ -1,4 +1,4 @@
-//create: 2015/04/28 11:51:41 Change: 2019/10/16 11:38:25 author:lijiao
+//create: 2015/04/28 11:51:41 Change: 2019/10/21 14:46:29 author:lijiao
 package main
 
 import (
@@ -12,10 +12,8 @@ import (
 func main() {
 	log.SetFlags(log.Llongfile)
 	mux := http.NewServeMux()
-	mux.Handle("/", Shell{})
+	mux.Handle("/", Echo{})
 	mux.Handle("/ping", Ping{})
-	mux.Handle("/cookie", Cookie{})
-	mux.Handle("/echo", Echo{})
 	idleTimeout, err := strconv.ParseInt(os.Getenv("IDLE_TIMEOUT"), 10, 64)
 	if err != nil {
 		panic("IDLE_TIMEOUT not interger")

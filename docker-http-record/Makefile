@@ -1,8 +1,8 @@
 SOURCE_DIR=$(shell pwd)/Server
 PROJECT=$(shell basename ${SOURCE_DIR})
 PREFIX=lijiaocn
-TAG=2.2.1
-IMAGE=${PREFIX}/webshell:${TAG}
+TAG=0.0.1
+IMAGE=${PREFIX}/http-record:${TAG}
 
 build:
 	docker run --rm -v ${SOURCE_DIR}:/go/src/${PROJECT} -w /go/src/${PROJECT} golang:1.8.1 \
@@ -13,5 +13,5 @@ image:
 
 run:
 	docker run -idt \
-		-p 8080:80  \
+		-p 1234:8080  \
 		${IMAGE}
