@@ -1,0 +1,69 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: tail-with-nginx-tranproxy
+  name: tail-with-nginx-tranproxy
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      run: tail-with-nginx-tranproxy
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: tail-with-nginx-tranproxy
+    spec:
+      containers:
+      # 业务容器 
+      - image: lijiaocn/alpine-tool:0.1
+        name: tail
+        args:
+        - tail
+        - -f
+        - /dev/null
+        imagePullPolicy: IfNotPresent
+      # 透明代理的 SideCar 容器
+      - image: lijiaocn/nginx-tranproxy:0.1
+        args:
+        - -P 
+        - "80"
+        - -P 
+        - "8080"
+        - -N 
+        - "114.114.114.114"
+        - -N
+        - "8.8.8.8"
+        - --Set-Forwarded-For 
+        - default
+        - --Set-Client-Hostname 
+        - default
+        - -H 
+        - tranproxy:true
+        env:
+        - name: PODIP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        imagePullPolicy: Always
+        name: nginx-tranproxy
+        resources: {}
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

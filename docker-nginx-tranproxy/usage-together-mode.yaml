@@ -2,15 +2,15 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    run: nginx-tranproxy
-  name: nginx-tranproxy
+    run: tail-in-nginx-tranproxy
+  name: tail-in-nginx-tranproxy
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      run: nginx-tranproxy
+      run: tail-in-nginx-tranproxy
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -20,10 +20,35 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        run: nginx-tranproxy
+        run: tail-in-nginx-tranproxy
     spec:
       containers:
       - image: lijiaocn/nginx-tranproxy:0.1
+        args:
+        - -P 
+        - "80"
+        - -P 
+        - "8080"
+        - -N 
+        - "114.114.114.114"
+        - -N
+        - "8.8.8.8"
+        - --Set-Forwarded-For 
+        - default
+        - --Set-Client-Hostname 
+        - default
+        - -H 
+        - tranproxy:true
+        - --
+        # -- 后面是在容器内运行的服务的启动命令，这里用 tail 模拟
+        - tail
+        - -f
+        - /dev/null
+        env:
+        - name: PODIP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
         imagePullPolicy: Always
         name: nginx-tranproxy
         resources: {}
