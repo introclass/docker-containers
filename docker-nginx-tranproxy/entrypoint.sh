@@ -76,12 +76,10 @@ server {
 EOF
 }
 
-echo "############# Start ##########"
-echo `date`
 while :; do
 	case $1 in
 		-h|-\?|--help)
-			help
+			Help
 			exit
 			;;
 		-P|--port)
@@ -153,6 +151,8 @@ while :; do
 	shift
 done
 
+echo "################### Start ##################"
+echo `date`
 echo "############# Setting: Proxy Port ##########"
 echo ${!PORTS[@]}
 
